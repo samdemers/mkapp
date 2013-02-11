@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkStatusIcon" id="status_icon">
+    <property name="pixbuf">Images/audio-x-generic.png</property>
+    <signal name="activate" handler="toggle_gui"/>
+  </object>
+  <object class="GtkFileChooserDialog" id="file_chooser">
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Open file</property>
+    <property name="type_hint">normal</property>
+    <property name="has_separator">False</property>
+    <signal name="selection_changed" handler="file_chooser_selection"/>
+    <signal name="file_activated" handler="file_activated"/>
+    <signal name="close" handler="file_chooser_closed"/>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="file_chooser_vbox1">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="file_chooser_action_area1">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="file_chooser_cancel">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="file_chooser_cancel"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="file_chooser_ok">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="file_chooser_ok"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">file_chooser_cancel</action-widget>
+      <action-widget response="0">file_chooser_ok</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkFileFilter" id="filefilter1"/>
+</interface>

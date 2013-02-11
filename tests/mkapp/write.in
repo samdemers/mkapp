@@ -1,0 +1,9 @@
+define filter grep --line-buffered -vi error;
+
+listen filter;
+run filter;
+
+write filter "This is an error!";
+write filter "Hello, world!";
+
+eof filter;

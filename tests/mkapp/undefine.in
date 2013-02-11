@@ -1,0 +1,7 @@
+# Define and undefine modules, running or not. Nothing should be printed.
+define module1 echo "Hello, world!";
+define module2 cat;
+run module2;
+undefine module2;
+undefine module1;
+run module1;

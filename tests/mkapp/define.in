@@ -1,0 +1,10 @@
+# Create modules, run them and redefine them as they are running. They should
+# be shut down cleanly and replaced by the newly defined module.
+define module1 echo "Error!";
+run    module1;
+define module1 echo "\n"
+                    "\t\"Hello, world!\"\n"
+                    "\t\\t\\\"Hello, world!\\\"\\n" "\n"
+                    "\t"'\t"Hello, world!"\n';
+listen module1;
+run    module1;

@@ -1,0 +1,10 @@
+define module1 echo "Hello, this is an error!";
+define module2 echo "Hello, world!";
+
+listen module1;
+listen module2;
+
+ignore module1;
+
+run module1;
+run module2;

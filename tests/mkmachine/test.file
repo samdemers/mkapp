@@ -1,0 +1,30 @@
+#
+# Mkmachine test.
+#
+
+state3 {.* {Error!}}
+
+state1 {
+
+       (.*?)(world)(.*) => state2 {
+
+                    Hello, \2!
+                    \"Hello, \2!\" # This is a comment
+                    "Hello, \\1!\t# This is not a comment"
+                    'Hello, \3! \n\t# This is not a comment'
+                    \n\n
+       }
+
+       ".*" # This is a comment
+            {What?}
+
+}
+
+state2 {
+       .*?(world).* => state1 { Goodbye, \1! }
+       '.*' { What? }
+}
+
+state3 {
+       .* => state1 {Zzz...}
+}

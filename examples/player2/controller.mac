@@ -1,0 +1,47 @@
+#
+# Music player controller. Signals received from the user interface change
+# the program state. Transitions from one state to another produce mkapp
+# commands.
+#
+
+
+hidden {
+    toggle_gui => shown { run html_gui; }
+}
+
+shown {
+    toggle_gui => hidden { kill html_gui; }
+    open => open_file { write glade_gui "file_chooser show"; }
+    play {
+        write id3    $file;
+        run   mpg321;
+        write mpg321 LOAD $file;        
+    }
+    pause { write mpg321 PAUSE; }
+    stop { write mpg321 STOP; }
+}
+
+open_file {
+    file_chooser_ok => shown {
+        run             mpg321;
+        write id3       $file;
+        write mpg321    LOAD $file;
+        write glade_gui file_chooser hide;
+    }
+
+    file_activated\t(.*) => shown {
+        file = \1
+        run             mpg321;
+        write id3       $file;
+        write mpg321    LOAD $file;
+        write glade_gui file_chooser hide;
+    }
+
+    selection_changed\t(.*) {
+        file = \1
+    }
+
+    file_chooser_cancel => shown {
+        write glade_gui file_chooser hide;
+    }
+}

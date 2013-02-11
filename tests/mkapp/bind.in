@@ -1,0 +1,27 @@
+# Define four modules: two writers and two listeners. Make sure the output
+# makes it to standard output.
+define module1 echo
+"Hello,
+world!";
+
+define module2 echo
+"Hello,
+people!";
+
+define module3 grep --line-buffered Hello;
+
+listen module3;
+
+bind module1 module3;
+bind module2 module3;
+
+run module3;
+run module4;
+
+run module1;
+wait module1;
+
+run module2;
+wait module2;
+
+eof module3;

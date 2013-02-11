@@ -1,0 +1,19 @@
+define module1 echo 'Hello, this is an error!';
+define module2 echo 'Hello, world!';
+
+define filter grep --line-buffered Hello;
+
+bind module1 filter;
+bind module2 filter;
+
+listen filter;
+run filter;
+
+unbind module1 filter;
+
+run module2;
+run module1;
+
+wait module1;
+wait module2;
+eof filter;
